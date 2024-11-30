@@ -30,7 +30,8 @@ jobs:
           unzip build.zip -d run
           sudo apt update
           sudo apt install cabextract wimtools chntpw genisoimage
-
+          echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
+          
       - name: Run build
         run: |
           cd run

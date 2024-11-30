@@ -29,7 +29,7 @@ jobs:
           wget -O build.zip ${{ github.event.inputs.DOWNLOAD_URL }}
           unzip build.zip -d run
           sudo apt update
-          sudo apt install cabextract wimlib-imagex
+          sudo apt install cabextract wimtools chntpw genisoimage
 
       - name: Run build
         run: |

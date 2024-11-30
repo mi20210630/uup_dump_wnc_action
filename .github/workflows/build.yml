@@ -40,4 +40,5 @@ jobs:
         uses: ncipollo/release-action@v1.8.0
         with:
           artifacts: "${{ github.workspace }}/run/*.iso"
+          tag: "Build_${{ env.BUILD_TIME }}"
           token: ${{ secrets.TOKEN }}

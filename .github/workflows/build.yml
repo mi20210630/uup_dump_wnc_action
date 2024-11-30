@@ -36,6 +36,7 @@ jobs:
         run: |
           cd run
           bash uup_download_linux.sh
+          ls
           
       - name: Upload to Release‌‌
         uses: ncipollo/release-action@v1.8.0

@@ -10,7 +10,7 @@ on:
       DOWNLOAD_URL:
         description: 'DOWNLOAD_URL'
         required: true
-        default: 'https://uupdump.net/get.php?id=6b214305-5bc5-4904-a751-ea237c62f6ac&pack=en-us&edition=wnc'
+        default: 'https://github.com/mi20210630/uup_dump_wnc_action/releases/download/ready-pack/26100.2314_arm64_en-us_wnc_6b214305_convert.zip'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,10 +24,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Download
+      - name: Get ready
         run: |
           wget -O build.zip ${{ github.event.inputs.DOWNLOAD_URL }}
           unzip build.zip -d run
+          sudo apt update
+          sudo apt install cabextract
 
       - name: Run build
         run: |

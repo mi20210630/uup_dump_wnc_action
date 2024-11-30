@@ -36,11 +36,13 @@ jobs:
         run: |
           cd run
           bash uup_download_linux.sh
-          7z a -v2000m output.7z *.iso
+          mkdir output
+          7z a -v2000m output/output.7z *.iso
+          7z a -v2000m output/build.7z *.ISO
           
       - name: Upload to Release‌‌
         uses: ncipollo/release-action@v1.8.0
         with:
-          artifacts: "${{ github.workspace }}/run/*.7z"
+          artifacts: "${{ github.workspace }}/run/output/*"
           tag: "Build_${{ env.BUILD_TIME }}"
           token: ${{ secrets.TOKEN }}

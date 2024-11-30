@@ -29,18 +29,18 @@ jobs:
           wget -O build.zip ${{ github.event.inputs.DOWNLOAD_URL }}
           unzip build.zip -d run
           sudo apt update
-          sudo apt install cabextract wimtools chntpw genisoimage
+          sudo apt install cabextract wimtools chntpw genisoimage p7zip-full
           echo "BUILD_TIME=$(date +%s | md5sum | awk '{print substr($1,1,10)}')" >> $GITHUB_ENV
           
       - name: Run build
         run: |
           cd run
           bash uup_download_linux.sh
-          ls
+          7z a -v2000m output.7z *.iso
           
       - name: Upload to Release‌‌
         uses: ncipollo/release-action@v1.8.0
         with:
-          artifacts: "${{ github.workspace }}/run/*.iso"
+          artifacts: "${{ github.workspace }}/run/*.7z"
           tag: "Build_${{ env.BUILD_TIME }}"
           token: ${{ secrets.TOKEN }}
